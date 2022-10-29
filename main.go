@@ -20,7 +20,7 @@ func main() {
 	userController := controllers.NewUser(userServices)
 
 	router := gin.Default()
-	app := routes.NewRouter(router, userController)
+	app := routes.NewRouter(router, userController, userServices)
 	app.Run()
 
 }
