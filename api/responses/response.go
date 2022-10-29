@@ -18,7 +18,7 @@ func BadRequestError(c *gin.Context, err interface{}) {
 		Error:   err,
 	}
 
-	c.JSON(http.StatusBadRequest, resp)
+	c.AbortWithStatusJSON(http.StatusBadRequest, resp)
 
 }
 
@@ -28,7 +28,14 @@ func InternalServerError(c *gin.Context, err interface{}) {
 		Error:   err,
 	}
 
-	c.JSON(http.StatusBadRequest, resp)
+	c.AbortWithStatusJSON(http.StatusBadRequest, resp)
+}
+
+func UnauthorizedRequest(c *gin.Context) {
+	resp := &Response{
+		Message: "UNAUTHORIZED_REQUEST",
+	}
+	c.AbortWithStatusJSON(http.StatusUnauthorized, resp)
 }
 
 func Success(c *gin.Context, statusCode int, msg string) {

@@ -2,38 +2,18 @@ package config
 
 import (
 	"fmt"
-	"log"
-	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/jusidama18/mygram-api-go/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-var (
-	dbHost string
-	dbUser string
-	dbPass string
-	dbName string
-	dbPort string
-)
-
-func getEnv() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	dbHost = os.Getenv("DB_HOST")
-	dbUser = os.Getenv("DB_USER")
-	dbPass = os.Getenv("DB_PASS")
-	dbName = os.Getenv("DB_NAME")
-	dbPort = os.Getenv("DB_PORT")
-
-}
-
 func ConnectPostgresGORM() (*gorm.DB, error) {
-	getEnv()
+	dbHost := GetEnv("DB_HOST")
+	dbUser := GetEnv("DB_USER")
+	dbPass := GetEnv("DB_PASS")
+	dbName := GetEnv("DB_NAME")
+	dbPort := GetEnv("DB_PORT")
 
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUser, dbPass, dbName)
 
