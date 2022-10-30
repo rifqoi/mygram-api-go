@@ -1,6 +1,7 @@
 package responses
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -31,9 +32,9 @@ func InternalServerError(c *gin.Context, err interface{}) {
 	c.AbortWithStatusJSON(http.StatusBadRequest, resp)
 }
 
-func UnauthorizedRequest(c *gin.Context) {
+func UnauthorizedRequest(c *gin.Context, msg string) {
 	resp := &Response{
-		Message: "UNAUTHORIZED_REQUEST",
+		Message: fmt.Sprintf("UNAUTHORIZED_REQUEST: %s", msg),
 	}
 	c.AbortWithStatusJSON(http.StatusUnauthorized, resp)
 }

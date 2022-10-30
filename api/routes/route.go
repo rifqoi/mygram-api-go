@@ -4,29 +4,28 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jusidama18/mygram-api-go/api/controllers"
 	"github.com/jusidama18/mygram-api-go/api/middlewares"
-	"github.com/jusidama18/mygram-api-go/services"
 )
 
 type Router struct {
-	router  *gin.Engine
-	userCtl *controllers.UserController
-	userSvc *services.UserService
+	router     *gin.Engine
+	user       *controllers.UserController
+	middleware *middlewares.Middleware
 }
 
-func NewRouter(router *gin.Engine, user *controllers.UserController, userSvc *services.UserService) *Router {
+func NewRouter(router *gin.Engine, user *controllers.UserController, middleware *middlewares.Middleware) *Router {
 	return &Router{
-		router:  router,
-		userCtl: user,
-		userSvc: userSvc,
+		router:     router,
+		user:       user,
+		middleware: middleware,
 	}
 }
 
 func (r *Router) Run() {
-	r.router.POST("/users/register", r.userCtl.RegisterUser)
-	r.router.POST("/users/login", r.userCtl.Login)
+	r.router.POST("/users/register", r.user.RegisterUser)
+	r.router.POST("/users/login", r.user.Login)
 
 	// Check middleware
-	r.router.GET("/check", middlewares.Authorization(r.userSvc), r.userCtl.Check)
+	r.router.GET("/check", r.middleware.Authorization(), r.user.Check)
 
 	r.router.Run(":8080")
 }

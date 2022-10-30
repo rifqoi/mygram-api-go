@@ -10,31 +10,41 @@ import (
 	"github.com/jusidama18/mygram-api-go/services"
 )
 
-func Authorization(userService *services.UserService) gin.HandlerFunc {
+type Middleware struct {
+	userService *services.UserService
+}
+
+func NewMiddleware(userService *services.UserService) *Middleware {
+	return &Middleware{
+		userService: userService,
+	}
+}
+
+func (m *Middleware) Authorization() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 
 		if !strings.Contains(authHeader, "Bearer") {
-			responses.BadRequestError(c, "Invalid token")
+			responses.UnauthorizedRequest(c, "JWT Token must be provided")
 			return
 		}
 		tokenString := strings.Replace(authHeader, "Bearer ", "", -1)
 
 		token, err := helpers.ValidateToken(tokenString)
 		if err != nil {
-			responses.BadRequestError(c, "Invalid token")
+			responses.UnauthorizedRequest(c, err.Error())
 			return
 		}
 		claims, ok := token.Claims.(jwt.MapClaims)
 		if !ok || !token.Valid {
-			responses.UnauthorizedRequest(c)
+			responses.UnauthorizedRequest(c, "Invalid token.")
 			return
 		}
 
 		email := claims["email"].(string)
-		user, err := userService.FindUserByEmail(email)
+		user, err := m.userService.FindUserByEmail(email)
 		if err != nil {
-			responses.UnauthorizedRequest(c)
+			responses.UnauthorizedRequest(c, err.Error())
 		}
 
 		c.Set("claims", claims)
