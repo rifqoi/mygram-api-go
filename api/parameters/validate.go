@@ -9,6 +9,18 @@ import (
 	en_translations "github.com/go-playground/validator/v10/translations/en"
 )
 
+func Validate(s interface{}) []string {
+	validate := validator.New()
+	validate.RegisterValidation("validatepassword", ValidatePassword)
+
+	err := validate.Struct(s)
+	if err != nil {
+		errs := TranslateError(err, validate)
+		return errs
+	}
+	return nil
+}
+
 func TranslateError(err error, validate *validator.Validate) []string {
 	var errs []string
 

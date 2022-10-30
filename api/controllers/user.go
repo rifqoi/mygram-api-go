@@ -1,11 +1,13 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jusidama18/mygram-api-go/api/parameters"
 	"github.com/jusidama18/mygram-api-go/api/responses"
+	"github.com/jusidama18/mygram-api-go/models"
 	"github.com/jusidama18/mygram-api-go/services"
 )
 
@@ -24,11 +26,11 @@ func (u *UserController) RegisterUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err.Error())
+		responses.BadRequestError(c, err.Error())
 		return
 	}
 
-	errs := req.Validate()
+	errs := parameters.Validate(req)
 	if errs != nil {
 		responses.BadRequestError(c, errs)
 		return
@@ -41,4 +43,41 @@ func (u *UserController) RegisterUser(c *gin.Context) {
 	}
 
 	responses.SuccessWithData(c, http.StatusCreated, user, "user successfully created")
+}
+
+func (u *UserController) Login(c *gin.Context) {
+	var req parameters.UserLogin
+
+	err := c.ShouldBindJSON(&req)
+	if err != nil {
+		responses.BadRequestError(c, err.Error())
+		return
+	}
+
+	errs := parameters.Validate(req)
+	if errs != nil {
+		responses.BadRequestError(c, errs)
+		return
+	}
+
+	token, err := u.svc.Login(req.Email, req.Password)
+	if err != nil {
+		responses.InternalServerError(c, err.Error())
+		return
+	}
+
+	responses.SuccessWithData(c, http.StatusOK, gin.H{
+		"token": token,
+	}, "login successful")
+}
+
+func (u *UserController) Check(c *gin.Context) {
+	userInfo, exists := c.Get("userInfo")
+	if !exists {
+		responses.InternalServerError(c, fmt.Errorf("context error"))
+	}
+
+	user := userInfo.(*models.User)
+
+	responses.SuccessWithData(c, http.StatusOK, user, "success")
 }
