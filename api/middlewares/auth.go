@@ -24,8 +24,8 @@ func (m *Middleware) Authorization() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 
-		if !strings.Contains(authHeader, "Bearer") {
-			responses.UnauthorizedRequest(c, "JWT Token must be provided")
+		if !strings.HasPrefix(authHeader, "Bearer ") {
+			responses.UnauthorizedRequest(c, "JWT Token must be provided.")
 			return
 		}
 		tokenString := strings.Replace(authHeader, "Bearer ", "", -1)
@@ -41,10 +41,19 @@ func (m *Middleware) Authorization() gin.HandlerFunc {
 			return
 		}
 
-		email := claims["email"].(string)
-		user, err := m.userService.FindUserByEmail(email)
+		// Cek apakah "id" exist didalam map claims
+		if _, exist := claims["id"]; !exist {
+			responses.UnauthorizedRequest(c, "Invalid token")
+			return
+		}
+
+		// Default unmarshal dari encoding/json itu ke float64 sehingga di cast ke float64
+		// https://stackoverflow.com/questions/70705673/panic-interface-conversion-interface-is-float64-not-int64
+		id := int(claims["id"].(float64))
+		user, err := m.userService.FindUserByID(id)
 		if err != nil {
 			responses.UnauthorizedRequest(c, err.Error())
+			return
 		}
 
 		c.Set("claims", claims)

@@ -40,12 +40,12 @@ func (u *UserService) RegisterUser(req *parameters.UserRegister) (*models.User, 
 }
 
 func (u *UserService) Login(email string, password string) (*string, error) {
-	err := u.repo.Login(email, password)
+	user, err := u.repo.Login(email, password)
 	if err != nil {
 		return nil, err
 	}
 
-	token, err := helpers.GenerateToken(email)
+	token, err := helpers.GenerateToken(user)
 	if err != nil {
 		return nil, err
 	}
@@ -61,4 +61,33 @@ func (u *UserService) FindUserByEmail(email string) (*models.User, error) {
 
 	return user, nil
 
+}
+
+func (u *UserService) UpdateUser(currentUser *models.User, req *parameters.UserUpdate) (*models.User, error) {
+	updatedUser := &models.User{
+		Email:    req.Email,
+		Username: req.Username,
+	}
+	responseUser, err := u.repo.UpdateUser(currentUser, updatedUser)
+	if err != nil {
+		return nil, err
+	}
+	return responseUser, nil
+}
+
+func (u *UserService) DeleteUser(user *models.User) error {
+	err := u.repo.DeleteUser(user)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *UserService) FindUserByID(id int) (*models.User, error) {
+	user, err := u.repo.FindUserByID(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
