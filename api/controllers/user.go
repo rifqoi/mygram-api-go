@@ -81,3 +81,62 @@ func (u *UserController) Check(c *gin.Context) {
 
 	responses.SuccessWithData(c, http.StatusOK, user, "success")
 }
+
+func (u *UserController) UpdateUser(c *gin.Context) {
+	var req parameters.UserUpdate
+
+	// Binding request body ke variabel req
+	err := c.ShouldBindJSON(&req)
+	if err != nil {
+		responses.BadRequestError(c, err.Error())
+		return
+	}
+
+	// Validasi request body apakah sudah benar
+	// Variabel errs berbeda dengan err
+	errs := parameters.Validate(req)
+	if errs != nil {
+		responses.BadRequestError(c, errs)
+		return
+	}
+
+	user, err := getUser(c)
+	if err != nil {
+		responses.InternalServerError(c, err.Error())
+		return
+	}
+
+	responseUser, err := u.svc.UpdateUser(user, &req)
+	if err != nil {
+		responses.InternalServerError(c, err.Error())
+		return
+	}
+
+	responses.SuccessWithData(c, http.StatusOK, responseUser, "user updated successfully")
+}
+
+func (u *UserController) DeleteUser(c *gin.Context) {
+	user, err := getUser(c)
+	if err != nil {
+		responses.InternalServerError(c, err.Error())
+		return
+	}
+
+	err = u.svc.DeleteUser(user)
+	if err != nil {
+		responses.InternalServerError(c, err.Error())
+		return
+	}
+
+	responses.Success(c, http.StatusOK, "Your account has been successfully deleted")
+}
+
+func getUser(c *gin.Context) (*models.User, error) {
+	userInfo, exists := c.Get("userInfo")
+	if !exists {
+		return nil, fmt.Errorf("context error")
+	}
+
+	user := userInfo.(*models.User)
+	return user, nil
+}

@@ -6,16 +6,18 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/jusidama18/mygram-api-go/config"
+	"github.com/jusidama18/mygram-api-go/models"
 )
 
 var JWT_SIGNING_METHOD = jwt.SigningMethodHS256
 var JWT_SIGNING_KEY = []byte(config.GetEnv("JWT_SIGNING_KEY"))
 
-func GenerateToken(email string) (string, error) {
+func GenerateToken(user *models.User) (string, error) {
 	LOGIN_EXPIRATION_DURATION := time.Now().Add(time.Hour * 24 * 7).Unix()
 
 	claim := jwt.MapClaims{}
-	claim["email"] = email
+	claim["email"] = user.Email
+	claim["id"] = user.ID
 	claim["exp"] = LOGIN_EXPIRATION_DURATION
 	claim["iat"] = time.Now().Unix()
 	token := jwt.NewWithClaims(JWT_SIGNING_METHOD, claim)

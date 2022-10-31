@@ -24,6 +24,71 @@ func NewUserRepository(db *gorm.DB) repository.UserRepository {
 
 func (u *userRepo) RegisterUser(user *models.User) error {
 	err := u.db.Create(user).Error
+	err = checkDuplicate(err, user)
+	return err
+}
+
+func (u *userRepo) FindUserByEmail(email string) (*models.User, error) {
+	var user models.User
+	result := u.db.Where("email", email).First(&user)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		return nil, fmt.Errorf("User not found")
+	}
+
+	return &user, result.Error
+}
+
+func (u *userRepo) Login(email string, password string) (*models.User, error) {
+
+	user, err := u.FindUserByEmail(email)
+	if err != nil {
+		return nil, err
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+func (u *userRepo) UpdateUser(currentUser *models.User, updatedUser *models.User) (*models.User, error) {
+	err := u.db.Model(&currentUser).Updates(&updatedUser).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, fmt.Errorf("User not found")
+		}
+		err = checkDuplicate(err, updatedUser)
+		return nil, err
+
+	}
+	responseUser, err := u.FindUserByEmail(updatedUser.Email)
+	if err != nil {
+		fmt.Println("gagal find user")
+		return nil, err
+	}
+	return responseUser, nil
+}
+
+func (u *userRepo) DeleteUser(user *models.User) error {
+	err := u.db.Delete(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return fmt.Errorf("User not found")
+	}
+	return nil
+}
+
+func (u *userRepo) FindUserByID(id int) (*models.User, error) {
+	var user models.User
+	result := u.db.Where("id", id).First(&user)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		return nil, fmt.Errorf("User not found")
+	}
+
+	return &user, result.Error
+}
+
+func checkDuplicate(err error, user *models.User) error {
 	if err != nil {
 		var pgErr *pgconn.PgError
 		if errors.As(err, &pgErr) {
@@ -39,30 +104,5 @@ func (u *userRepo) RegisterUser(user *models.User) error {
 		}
 		return err
 	}
-	return err
-}
-
-func (u *userRepo) FindUserByEmail(email string) (*models.User, error) {
-	var user models.User
-	result := u.db.Where("email", email).First(&user)
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		return nil, fmt.Errorf("User not found")
-	}
-
-	return &user, result.Error
-}
-
-func (u *userRepo) Login(email string, password string) error {
-
-	user, err := u.FindUserByEmail(email)
-	if err != nil {
-		return err
-	}
-
-	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
