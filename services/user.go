@@ -45,7 +45,7 @@ func (u *UserService) Login(email string, password string) (*string, error) {
 		return nil, err
 	}
 
-	token, err := helpers.GenerateToken(user)
+	token, err := helpers.GenerateToken(user.Email, user.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,6 @@ func (u *UserService) FindUserByEmail(email string) (*models.User, error) {
 	}
 
 	return user, nil
-
 }
 
 func (u *UserService) UpdateUser(currentUser *models.User, req *parameters.UserUpdate) (*models.User, error) {

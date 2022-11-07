@@ -25,9 +25,9 @@ func (r *Router) Run() {
 	r.router.POST("/users/login", r.user.Login)
 
 	// Check middleware
-	r.router.GET("/check", r.middleware.Authorization(), r.user.Check)
-	r.router.PUT("/users", r.middleware.Authorization(), r.user.UpdateUser)
-	r.router.DELETE("/users", r.middleware.Authorization(), r.user.DeleteUser)
+	r.router.GET("/check", r.middleware.Authorization, r.user.Check)
+	r.router.PUT("/users", r.middleware.Authorization, r.user.UpdateUser)
+	r.router.DELETE("/users", r.middleware.Authorization, r.user.DeleteUser)
 
 	r.router.Run(":8080")
 }
