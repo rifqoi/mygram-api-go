@@ -12,3 +12,11 @@ type UserRepository interface {
 	DeleteUser(user *models.User) error
 	FindUserByID(id int) (*models.User, error)
 }
+
+type PhotoRepository interface {
+	CreatePhoto(photo *models.Photo) (*models.Photo, error)
+	GetAllPhotos() ([]models.Photo, error)
+	UpdatePhoto(currentPhoto, newPhoto *models.Photo) (*models.Photo, error)
+	DeletePhoto(photo *models.Photo) error
+	FindPhotoByID(id int) (*models.Photo, error)
+}
