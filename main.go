@@ -17,12 +17,16 @@ func main() {
 	}
 
 	userRepo := gorm.NewUserRepository(db)
-	userServices := services.NewUser(userRepo)
-	userController := controllers.NewUser(userServices)
+	userServices := services.NewUserService(userRepo)
+	userController := controllers.NewUserController(userServices)
+
+	photoRepo := gorm.NewPhotoRepository(db)
+	photoService := services.NewPhotoService(photoRepo)
+	photoController := controllers.NewPhotoController(photoService)
 
 	middleware := middlewares.NewMiddleware(userServices)
 
 	router := gin.Default()
-	app := routes.NewRouter(router, userController, middleware)
+	app := routes.NewRouter(router, userController, photoController, middleware)
 	app.Run()
 }

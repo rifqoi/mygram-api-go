@@ -15,7 +15,7 @@ type UserController struct {
 	svc *services.UserService
 }
 
-func NewUser(svc *services.UserService) *UserController {
+func NewUserController(svc *services.UserService) *UserController {
 	return &UserController{
 		svc: svc,
 	}
@@ -100,7 +100,7 @@ func (u *UserController) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	user, err := getUser(c)
+	user, err := GetUser(c)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
@@ -116,7 +116,7 @@ func (u *UserController) UpdateUser(c *gin.Context) {
 }
 
 func (u *UserController) DeleteUser(c *gin.Context) {
-	user, err := getUser(c)
+	user, err := GetUser(c)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
@@ -129,14 +129,4 @@ func (u *UserController) DeleteUser(c *gin.Context) {
 	}
 
 	responses.Success(c, http.StatusOK, "Your account has been successfully deleted")
-}
-
-func getUser(c *gin.Context) (*models.User, error) {
-	userInfo, exists := c.Get("userInfo")
-	if !exists {
-		return nil, fmt.Errorf("context error")
-	}
-
-	user := userInfo.(*models.User)
-	return user, nil
 }
