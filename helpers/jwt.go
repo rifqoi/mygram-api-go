@@ -9,7 +9,6 @@ import (
 )
 
 var JWT_SIGNING_METHOD = jwt.SigningMethodHS256
-var JWT_SIGNING_KEY = []byte(config.GetEnv("JWT_SIGNING_KEY"))
 
 type JWTClaims struct {
 	jwt.StandardClaims
@@ -18,6 +17,7 @@ type JWTClaims struct {
 }
 
 func GenerateToken(email string, id int) (string, error) {
+	var JWT_SIGNING_KEY = []byte(config.GetEnv("JWT_SIGNING_KEY"))
 	LOGIN_EXPIRATION_DURATION := time.Now().Add(time.Hour * 24 * 7).Unix()
 
 	claims := JWTClaims{
@@ -39,6 +39,7 @@ func GenerateToken(email string, id int) (string, error) {
 
 func ValidateToken(encToken string) (jwt.MapClaims, error) {
 	// Cek signing method dari token
+	var JWT_SIGNING_KEY = []byte(config.GetEnv("JWT_SIGNING_KEY"))
 	token, err := jwt.Parse(encToken, func(t *jwt.Token) (interface{}, error) {
 		if method, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Invalid signing method.")

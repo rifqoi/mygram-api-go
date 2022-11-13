@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "5fdc1c3e-c3f3-41b6-9d20-4c3bc55e6f71",
+		"name": "MyGram API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18315454"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjY1NTA0Mjk3LCJpYXQiOjE2NjQ4OTk0OTcsInN1YiI6InJpZnFpMTExIn0.I-PyY0Lvl1PRikCJCXCRf1us_FXSLZAsjCPUq3tZsvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"h8@h8.com\",\n    \"password\": \"Hacktiv*8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"age\": 21,\n    \"email\": \"h8@h8.comma\",\n    \"password\": \"Hacktiv*8\",\n    \"username\": \"hacktiv8a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Img4QGg4LmNvbW1hIiwiZXhwIjoxNjY3ODI1MDg3LCJpYXQiOjE2NjcyMjAyODd9.-Wg6U-Z8Exk2lho_EomRHzO-85tHyKuY2JXVFCJOKrs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg0MTgyNDcsImlhdCI6MTY2NzgxMzQ0NywiZW1haWwiOiJoOEBoOC5jb20iLCJpZCI6NTl9.iS_--hTqzMYSSCVh3mqkCB-KrRkOA8ty_nGckVRGQQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"asd@asd.coma\",\n    \"username\": \"titikudaaz\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg5NTc3MTYsImlhdCI6MTY2ODM1MjkxNiwiZW1haWwiOiJoOEBoOC5jb20iLCJpZCI6ODV9.MfWtDDhrxCVf7060IFbYm5fyJkeiXFalaMTVPaaoAkU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/check",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Photo",
+			"item": [
+				{
+					"name": "Post New Photo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg0ODQ2OTksImlhdCI6MTY2Nzg3OTg5OSwiZW1haWwiOiJoOEBoOC5jb216eCIsImlkIjo2NX0.5qexjcmfSsD6vn7uaRr3gxyIkVAxXSz2fw-BGfu9rjw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Photo1\",\n    \"caption\": \"brooo\",\n    \"photo_url\": \"http://asd.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/photos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Photos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg0ODQ2OTksImlhdCI6MTY2Nzg3OTg5OSwiZW1haWwiOiJoOEBoOC5jb216eCIsImlkIjo2NX0.5qexjcmfSsD6vn7uaRr3gxyIkVAxXSz2fw-BGfu9rjw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/photos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Photo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg5NTc5MjksImlhdCI6MTY2ODM1MzEyOSwiZW1haWwiOiJoOEBoOC5jb20iLCJpZCI6ODZ9.AVPtiv_NRr9eQxaAGRy5saq1k-EI9ROGDlrdSg_2CNs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Photo2\",\n    \"caption\": \"brooo\",\n    \"photo_url\": \"http://fgh.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/photos/24",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"photos",
+								"24"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Photo By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg0MTgyNDcsImlhdCI6MTY2NzgxMzQ0NywiZW1haWwiOiJoOEBoOC5jb20iLCJpZCI6NTl9.iS_--hTqzMYSSCVh3mqkCB-KrRkOA8ty_nGckVRGQQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Photo1\",\n    \"caption\": \"brooo\",\n    \"photo_url\": \"http://aasd.coma\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/photos/100",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"photos",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}

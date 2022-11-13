@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  mygram-api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: mygram-api
+    restart: always
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - mygram
+
+  postgres:
+    image: postgres
+    container_name: pg-mygram
+    volumes:
+      - mygram:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=hacktiv8
+    networks:
+      - mygram
+
+networks:
+  mygram:
+    driver: bridge
+
+volumes:
+  mygram:
