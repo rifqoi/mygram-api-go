@@ -1,5 +1,38 @@
 # mygram-api-go
 
+## How to Run
+### Locally
+- Clone this repo
+```
+git clone https://github.com/jusidama18/mygram-api-go/
+```
+- Run PostgreSQL Docker script
+```
+chmod +x ./scripts/run-postgres.sh && ./run-postgres.sh
+```
+- Copy .env.example to .env
+```
+cp .env.example .env
+```
+- Run go webserver
+```
+go run ./main.go
+```
+- Enjoy!
+
+### Docker Compose
+- Clone this repo
+```
+git clone https://github.com/jusidama18/mygram-api-go/
+```
+- Copy .env.example to .env
+```
+cp .env.example .env
+```
+- Edit **DB_HOST** variable in .env file
+- Run `docker compose up`
+- Enjoy!
+
 # Documentation
 
 ## Users
