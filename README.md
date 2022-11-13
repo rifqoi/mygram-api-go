@@ -23,7 +23,7 @@ git clone https://github.com/jusidama18/mygram-api-go/
 ```
 - Run PostgreSQL Docker script
 ```
-chmod +x ./scripts/run-postgres.sh && ./run-postgres.sh
+chmod +x ./scripts/run-postgres.sh && ./scripts/run-postgres.sh
 ```
 - Copy .env.example to .env
 ```
