@@ -1,5 +1,20 @@
 # mygram-api-go
 
+## Pembagian Tugas
+| Bagian     | Detail             | Dikerjakan oleh          |
+|------------|--------------------|--------------------------|
+| Helper     | Generate Token     | Muhammad Rifqi Al Furqon |
+| Helper     | Validate Token     | Muhammad Rifqi Al Furqon |
+| Middleware | Authorization      | Muhammad Rifqi Al Furqon |
+| Endpoint   | GET /users         | Muhammad Rifqi Al Furqon |
+| Endpoint   | POST /users/:id    | Muhammad Rifqi Al Furqon |
+| Endpoint   | PUT /users/:id     | Muhammad Rifqi Al Furqon |
+| Endpoint   | DELETE /users/:id  | Muhammad Rifqi Al Furqon |
+| Endpoint   | GET /photos        | Muhammad Rifqi Al Furqon |
+| Endpoint   | POST /photos       | Muhammad Rifqi Al Furqon |
+| Endpoint   | DELETE /photos/:id | Muhammad Rifqi Al Furqon |
+| Endpoint   | PUT /photos/:id    | Muhammad Rifqi Al Furqon |
+
 ## How to Run
 ### Locally
 - Clone this repo
