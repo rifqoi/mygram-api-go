@@ -25,8 +25,8 @@ func main() {
 	photoController := controllers.NewPhotoController(photoService)
 
 	commentRepo := gorm.NewCommentRepository(db)
-	commentService := services.CommentService(commentRepo)
-	commentController := controllers.CommentController(commentService)
+	commentService := services.NewCommentService(commentRepo)
+	commentController := controllers.NewCommentController(commentService)
 
 	socialMediaRepo := gorm.NewSocialMediaRepository(db)
 	socialMediaService := services.NewSocialMediaService(socialMediaRepo)
