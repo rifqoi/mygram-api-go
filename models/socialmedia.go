@@ -14,3 +14,18 @@ type SocialMedia struct {
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
+
+type SocialMediaUserGet struct {
+	Email    string `json:"email"`
+	Username string `json:"username"`
+}
+
+type SocialMediaGet struct {
+	ID             int                `json:"id" gorm:"primaryKey"`
+	Name           string             `json:"name" gorm:"notNull"`
+	SocialMediaUrl string             `json:"social_media_url" gorm:"notNull"`
+	UserID         int                `json:"user_id" gorm:"notNull"`
+	User           SocialMediaUserGet `json:"user"`
+	CreatedAt      time.Time          `json:"created_at"`
+	UpdatedAt      time.Time          `json:"updated_at"`
+}

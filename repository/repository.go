@@ -28,3 +28,11 @@ type CommentRepository interface {
 	DeleteComment(comment *models.Comment) error
 	FindCommentByID(id int) (*models.Comment, error)
 }
+
+type SocialMediaRepository interface {
+	CreateSocialMedia(socialMedia *models.SocialMedia) (*models.SocialMedia, error)
+	GetAllSocialMedia() ([]models.SocialMedia, error)
+	UpdateSocialMedia(currentsocialMedia, newsocialMedia *models.SocialMedia) (*models.SocialMedia, error)
+	DeleteSosialMedia(SocialMedia *models.SocialMedia) error
+	FindSocialMediaByID(id int) (*models.SocialMedia, error)
+}
