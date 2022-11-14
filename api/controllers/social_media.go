@@ -56,5 +56,3 @@ func (sm *SocialMediaController) GetAllSocialMedia(c *gin.Context) {
 
 	responses.SuccessWithData(c, http.StatusOK, socialMedias, "successfully get all social medias")
 }
-
-func (sm *SocialMediaController) Get
