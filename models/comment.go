@@ -32,10 +32,10 @@ type CommentGetAll struct {
 	Message   string       `json:"message" gorm:"notNull"`
 	PhotoID   int          `json:"photo_id" gorm:"notNull"`
 	UserID    int          `json:"user_id" gorm:"notNull"`
-	CreatedAt time.Time    `json:"create_at"`
-	UpdatedAt time.Time    `json:"-"`
 	User      CommentUser  `json:"-"`
 	Photo     CommentPhoto `json:"-"`
+	CreatedAt time.Time    `json:"create_at"`
+	UpdatedAt time.Time    `json:"-"`
 }
 
 type CommentUpdate struct {

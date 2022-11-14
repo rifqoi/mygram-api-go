@@ -24,8 +24,9 @@ func main() {
 	photoService := services.NewPhotoService(photoRepo)
 	photoController := controllers.NewPhotoController(photoService)
 
-	// commentRepo := gorm.NewCommentRepository(db)
-	// commentService := services.CommentService(commentRepo)
+	commentRepo := gorm.NewCommentRepository(db)
+	commentService := services.CommentService(commentRepo)
+	commentController := controllers.CommentController(commentService)
 
 	socialMediaRepo := gorm.NewSocialMediaRepository(db)
 	socialMediaService := services.NewSocialMediaService(socialMediaRepo)
@@ -34,6 +35,6 @@ func main() {
 	middleware := middlewares.NewMiddleware(userServices)
 
 	router := gin.Default()
-	app := routes.NewRouter(router, userController, photoController, socialMediaController, middleware)
+	app := routes.NewRouter(router, userController, photoController, commentController, socialMediaController, middleware)
 	app.Run()
 }

@@ -10,15 +10,17 @@ type Router struct {
 	router      *gin.Engine
 	user        *controllers.UserController
 	photo       *controllers.PhotoController
+	comment     *controllers.CommentController
 	socialMedia *controllers.SocialMediaController
 	middleware  *middlewares.Middleware
 }
 
-func NewRouter(router *gin.Engine, user *controllers.UserController, photo *controllers.PhotoController, socialMedia *controllers.SocialMediaController, middleware *middlewares.Middleware) *Router {
+func NewRouter(router *gin.Engine, user *controllers.UserController, photo *controllers.PhotoController, comment *controllers.CommentController, socialMedia *controllers.SocialMediaController, middleware *middlewares.Middleware) *Router {
 	return &Router{
 		router:      router,
 		user:        user,
 		photo:       photo,
+		comment:     comment,
 		socialMedia: socialMedia,
 		middleware:  middleware,
 	}
@@ -37,9 +39,16 @@ func (r *Router) Run() {
 	photoRoutes.PUT("/:id", r.photo.UpdatePhoto)
 	photoRoutes.DELETE("/:id", r.photo.DeletePhoto)
 
+	commentRoutes := r.router.Group("/comments").Use(r.middleware.Authorization)
+	commentRoutes.POST("/", r.comment.CreateComment)
+	commentRoutes.GET("/", r.comment.GetAllComment)
+	commentRoutes.PUT("/:id", r.comment.UpdateComment)
+	commentRoutes.DELETE("/:id", r.comment.DeleteComment)
+
 	socialMediaRoutes := r.router.Group("/socialmedias").Use(r.middleware.Authorization)
 	socialMediaRoutes.POST("/", r.socialMedia.CreateSocialMedia)
 	socialMediaRoutes.GET("/", r.socialMedia.GetAllSocialMedia)
+
 	// Check middleware
 	r.router.GET("/check", r.middleware.Authorization, r.user.Check)
 

@@ -41,7 +41,7 @@ func (sm *socialMediaRepo) GetAllSocialMedia() ([]models.SocialMedia, error) {
 	return socialMedias, nil
 }
 
-func (sm *socialMediaRepo) UpdatesocialMedia(currentsocialMedia, newsocialMedia *models.SocialMedia) (*models.SocialMedia, error) {
+func (sm *socialMediaRepo) UpdateSocialMedia(currentsocialMedia, newsocialMedia *models.SocialMedia) (*models.SocialMedia, error) {
 	err := sm.db.Model(&currentsocialMedia).Updates(&newsocialMedia).Find(&currentsocialMedia).Error
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (sm *socialMediaRepo) UpdatesocialMedia(currentsocialMedia, newsocialMedia 
 	return currentsocialMedia, nil
 }
 
-func (sm *socialMediaRepo) DeletesosialMedia(socialMedia *models.SocialMedia) error {
+func (sm *socialMediaRepo) DeleteSosialMedia(socialMedia *models.SocialMedia) error {
 	err := sm.db.Delete(socialMedia).Error
 	return err
 }
