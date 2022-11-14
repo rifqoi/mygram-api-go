@@ -29,17 +29,17 @@ func (c *commentRepository) CreateComment(comment *models.Comment) (*models.Comm
 }
 
 func (c *commentRepository) GetAllComment() ([]models.Comment, error) {
-	var comment []models.Comment
+	var comments []models.Comment
 
 	err := c.db.Preload("User", func(db *gorm.DB) *gorm.DB {
 		return db.Select("ID", "Email", "Username")
-	}).Find(&comment).Error
+	}).Find(&comments).Error
 
 	if err != nil {
 		return nil, err
 	}
 
-	return comment, nil
+	return comments, nil
 }
 
 func (c *commentRepository) UpdateComment(currentComment, newComment *models.Comment) (*models.Comment, error) {

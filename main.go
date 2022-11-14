@@ -24,6 +24,9 @@ func main() {
 	photoService := services.NewPhotoService(photoRepo)
 	photoController := controllers.NewPhotoController(photoService)
 
+	// commentRepo := gorm.NewCommentRepository(db)
+	// commentService := services.CommentService(commentRepo)
+
 	middleware := middlewares.NewMiddleware(userServices)
 
 	router := gin.Default()
