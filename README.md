@@ -14,6 +14,10 @@
 | Endpoint   | POST /photos       | Muhammad Rifqi Al Furqon |
 | Endpoint   | DELETE /photos/:id | Muhammad Rifqi Al Furqon |
 | Endpoint   | PUT /photos/:id    | Muhammad Rifqi Al Furqon |
+| Endpoint   | GET /comments        | Juan Simon Damanik |
+| Endpoint   | POST /comments       | Juan Simon Damanik |
+| Endpoint   | DELETE /comments/:id | Juan Simon Damanik |
+| Endpoint   | PUT /comments/:id    | Juan Simon Damanik |
 
 ## How to Run
 ### Locally
