@@ -27,9 +27,13 @@ func main() {
 	// commentRepo := gorm.NewCommentRepository(db)
 	// commentService := services.CommentService(commentRepo)
 
+	socialMediaRepo := gorm.NewSocialMediaRepository(db)
+	socialMediaService := services.NewSocialMediaService(socialMediaRepo)
+	socialMediaController := controllers.NewSocialMediaController(socialMediaService)
+
 	middleware := middlewares.NewMiddleware(userServices)
 
 	router := gin.Default()
-	app := routes.NewRouter(router, userController, photoController, middleware)
+	app := routes.NewRouter(router, userController, photoController, socialMediaController, middleware)
 	app.Run()
 }
