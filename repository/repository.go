@@ -20,3 +20,11 @@ type PhotoRepository interface {
 	DeletePhoto(photo *models.Photo) error
 	FindPhotoByID(id int) (*models.Photo, error)
 }
+
+type CommentRepository interface {
+	CreateComment(comment *models.Comment) (*models.Comment, error)
+	GetAllComment() ([]models.Comment, error)
+	UpdateComment(currentComment, newComment *models.Comment) (*models.Comment, error)
+	DeleteComment(comment *models.Comment) error
+	FindCommentByID(id int) (*models.Comment, error)
+}
