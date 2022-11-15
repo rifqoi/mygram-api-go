@@ -10,18 +10,18 @@ import (
 	"github.com/jusidama18/mygram-api-go/services"
 )
 
-type SocialMediaController struct {
-	svc *services.SocialMediaService
+type CommentController struct {
+	svc *services.CommentService
 }
 
-func NewSocialMediaController(svc *services.SocialMediaService) *SocialMediaController {
-	return &SocialMediaController{
+func NewCommentController(svc *services.CommentService) *CommentController {
+	return &CommentController{
 		svc: svc,
 	}
 }
 
-func (sm *SocialMediaController) CreateSocialMedia(c *gin.Context) {
-	var req parameters.SocialMediaCreate
+func (cm *CommentController) CreateComment(c *gin.Context) {
+	var req parameters.CreateComment
 
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
@@ -34,34 +34,35 @@ func (sm *SocialMediaController) CreateSocialMedia(c *gin.Context) {
 		responses.BadRequestError(c, errs)
 		return
 	}
+
 	user, err := GetUser(c)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
 	}
 
-	socialMediaResp, err := sm.svc.CreateSocialMedia(req, user.ID)
-	if err != nil {
-		responses.InternalServerError(c, err.Error())
-		return
-	}
-	responses.SuccessWithData(c, http.StatusCreated, socialMediaResp, "social media successfully created")
-}
-
-func (sm *SocialMediaController) GetAllSocialMedia(c *gin.Context) {
-	socialMedias, err := sm.svc.GetAllSocialMedia()
+	resComment, err := cm.svc.CreateComment(req, user.ID)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
 	}
 
-	responses.SuccessWithData(c, http.StatusOK, socialMedias, "successfully get all social medias")
+	responses.SuccessWithData(c, http.StatusCreated, resComment, "comment successfully created")
 }
 
-func (sm *SocialMediaController) UpdateSocialMedia(c *gin.Context) {
-	var req parameters.SocialMediaUpdate
+func (cm *CommentController) GetAllComment(c *gin.Context) {
+	resComment, err := cm.svc.GetAllComment()
+	if err != nil {
+		responses.InternalServerError(c, err.Error())
+		return
+	}
+	responses.SuccessWithData(c, http.StatusOK, resComment, "successfully get all comments")
+}
 
-	smID, err := strconv.Atoi(c.Param("id"))
+func (cm *CommentController) UpdateComment(c *gin.Context) {
+	var req parameters.UpdateComment
+
+	commentID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		responses.BadRequestError(c, "ID must be a number")
 		return
@@ -73,30 +74,23 @@ func (sm *SocialMediaController) UpdateSocialMedia(c *gin.Context) {
 		return
 	}
 
-	errs := parameters.Validate(&req)
-	if errs != nil {
-		responses.BadRequestError(c, errs)
-		return
-	}
-
 	user, err := GetUser(c)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
 	}
 
-	resp, err := sm.svc.UpdateSocialMedia(req, smID, user.ID)
+	updatedComment, err := cm.svc.UpdateComment(req, commentID, user.ID)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
 	}
 
-	responses.SuccessWithData(c, http.StatusAccepted, resp, "social media updated successfully")
+	responses.SuccessWithData(c, http.StatusAccepted, updatedComment, "comment updated successfully.")
 }
 
-func (sm *SocialMediaController) DeleteSocialMedia(c *gin.Context) {
-
-	smID, err := strconv.Atoi(c.Param("id"))
+func (cm *CommentController) DeleteComment(c *gin.Context) {
+	commentID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		responses.BadRequestError(c, "ID must be a number")
 		return
@@ -108,11 +102,11 @@ func (sm *SocialMediaController) DeleteSocialMedia(c *gin.Context) {
 		return
 	}
 
-	err = sm.svc.DeleteSocialMedia(smID, user.ID)
+	err = cm.svc.DeleteComment(commentID, user.ID)
 	if err != nil {
 		responses.InternalServerError(c, err.Error())
 		return
 	}
 
-	responses.Success(c, http.StatusAccepted, "social media successfully deleted.")
+	responses.Success(c, http.StatusAccepted, "comment successfully deleted.")
 }
