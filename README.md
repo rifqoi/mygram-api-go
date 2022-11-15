@@ -16,8 +16,8 @@
 | Endpoint   | PUT /photos/:id    	| Muhammad Rifqi Al Furqon |
 | Endpoint	 | POST /socialmedia/:id| Dion Fauzi 			   |
 | Endpoint	 | GET /socialmedia/ :id| Dion Fauzi			   |
-| Endpoint	 | PUT /socialmedia		| Dion Fauzi			   |
-| Endpoint   | DELETE /socialmedia  | Dion Fauzi			   |
+| Endpoint	 | DELETE /socialmedia 	| Dion Fauzi			   |
+| Endpoint   | PUT /socialmedia	    | Dion Fauzi			   |
 ## How to Run
 ### Locally
 - Clone this repo
