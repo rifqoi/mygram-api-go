@@ -57,6 +57,9 @@ cp .env.example .env
 - Run `docker compose up`
 - Enjoy!
 
+## Deployment
+Project deployed on Google Compute Engine with this URL `http://34.128.117.225:39920/`
+
 # Documentation
 
 ## Users
