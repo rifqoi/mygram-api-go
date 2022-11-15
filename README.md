@@ -1,6 +1,7 @@
 # mygram-api-go
 
 ## Pembagian Tugas
+
 | Bagian     | Detail             | Dikerjakan oleh          |
 |------------|--------------------|--------------------------|
 | Helper     | Generate Token     | Muhammad Rifqi Al Furqon |
@@ -18,10 +19,10 @@
 | Endpoint   | POST /comments       | Juan Simon Damanik |
 | Endpoint   | DELETE /comments/:id | Juan Simon Damanik |
 | Endpoint   | PUT /comments/:id    | Juan Simon Damanik |
-| Endpoint   | POST /socialmedia/:id | Dion Fauzi |
-| Endpoint   | GET /socialmedia/ :id | Dion Fauzi |
-| Endpoint   | DELETE /socialmedia | Dion Fauzi	|
-| Endpoint   | PUT /socialmedia | Dion Fauzi |
+| Endpoint	 | POST /socialmedia/:id| Dion Fauzi 			   |
+| Endpoint	 | GET /socialmedia/ :id| Dion Fauzi			   |
+| Endpoint	 | DELETE /socialmedia 	| Dion Fauzi			   |
+| Endpoint   | PUT /socialmedia	    | Dion Fauzi			   |
 
 ## How to Run
 ### Locally

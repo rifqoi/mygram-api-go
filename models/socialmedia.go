@@ -29,3 +29,11 @@ type SocialMediaGet struct {
 	CreatedAt      time.Time          `json:"created_at"`
 	UpdatedAt      time.Time          `json:"updated_at"`
 }
+
+type SocialMediaUpdate struct {
+	ID             int       `json:"id" gorm:"primaryKey"`
+	Name           string    `json:"name" gorm:"notNull"`
+	SocialMediaUrl string    `json:"social_media_url" gorm:"notNull"`
+	UserID         int       `json:"user_id" gorm:"notNull"`
+	UpdatedAt      time.Time `json:"updated_at"`
+}

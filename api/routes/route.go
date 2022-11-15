@@ -48,6 +48,8 @@ func (r *Router) Run() {
 	socialMediaRoutes := r.router.Group("/socialmedias").Use(r.middleware.Authorization)
 	socialMediaRoutes.POST("/", r.socialMedia.CreateSocialMedia)
 	socialMediaRoutes.GET("/", r.socialMedia.GetAllSocialMedia)
+	socialMediaRoutes.PUT("/:id", r.socialMedia.UpdateSocialMedia)
+	socialMediaRoutes.DELETE("/:id", r.socialMedia.DeleteSocialMedia)
 
 	// Check middleware
 	r.router.GET("/check", r.middleware.Authorization, r.user.Check)
