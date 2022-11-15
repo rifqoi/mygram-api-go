@@ -58,7 +58,7 @@ cp .env.example .env
 - Enjoy!
 
 ## Deployment
-Project deployed on Google Compute Engine with this URL `http://34.128.117.225:39920/`
+Project deployed on Google Compute Engine with this URL `http://mygram-api.jusidama.eu.org:39920`
 
 # Documentation
 
