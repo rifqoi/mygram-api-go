@@ -1,23 +1,29 @@
 # mygram-api-go
 
 ## Pembagian Tugas
-| Bagian     | Detail             	| Dikerjakan oleh          |
-|------------|--------------------	|--------------------------|
-| Helper     | Generate Token     	| Muhammad Rifqi Al Furqon |
-| Helper     | Validate Token     	| Muhammad Rifqi Al Furqon |
-| Middleware | Authorization      	| Muhammad Rifqi Al Furqon |
-| Endpoint   | GET /users         	| Muhammad Rifqi Al Furqon |
-| Endpoint   | POST /users/:id   	| Muhammad Rifqi Al Furqon |
-| Endpoint   | PUT /users/:id     	| Muhammad Rifqi Al Furqon |
-| Endpoint   | DELETE /users/:id  	| Muhammad Rifqi Al Furqon |
-| Endpoint   | GET /photos        	| Muhammad Rifqi Al Furqon |
-| Endpoint   | POST /photos       	| Muhammad Rifqi Al Furqon |
-| Endpoint   | DELETE /photos/:id 	| Muhammad Rifqi Al Furqon |
-| Endpoint   | PUT /photos/:id    	| Muhammad Rifqi Al Furqon |
+
+| Bagian     | Detail             | Dikerjakan oleh          |
+|------------|--------------------|--------------------------|
+| Helper     | Generate Token     | Muhammad Rifqi Al Furqon |
+| Helper     | Validate Token     | Muhammad Rifqi Al Furqon |
+| Middleware | Authorization      | Muhammad Rifqi Al Furqon |
+| Endpoint   | GET /users         | Muhammad Rifqi Al Furqon |
+| Endpoint   | POST /users/:id    | Muhammad Rifqi Al Furqon |
+| Endpoint   | PUT /users/:id     | Muhammad Rifqi Al Furqon |
+| Endpoint   | DELETE /users/:id  | Muhammad Rifqi Al Furqon |
+| Endpoint   | GET /photos        | Muhammad Rifqi Al Furqon |
+| Endpoint   | POST /photos       | Muhammad Rifqi Al Furqon |
+| Endpoint   | DELETE /photos/:id | Muhammad Rifqi Al Furqon |
+| Endpoint   | PUT /photos/:id    | Muhammad Rifqi Al Furqon |
+| Endpoint   | GET /comments        | Juan Simon Damanik |
+| Endpoint   | POST /comments       | Juan Simon Damanik |
+| Endpoint   | DELETE /comments/:id | Juan Simon Damanik |
+| Endpoint   | PUT /comments/:id    | Juan Simon Damanik |
 | Endpoint	 | POST /socialmedia/:id| Dion Fauzi 			   |
 | Endpoint	 | GET /socialmedia/ :id| Dion Fauzi			   |
 | Endpoint	 | DELETE /socialmedia 	| Dion Fauzi			   |
 | Endpoint   | PUT /socialmedia	    | Dion Fauzi			   |
+
 ## How to Run
 ### Locally
 - Clone this repo
