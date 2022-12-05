@@ -13,7 +13,6 @@ FROM alpine:latest
 RUN mkdir /app
 
 WORKDIR /app
-COPY --from=builder /app/mygram /app
-COPY .env /app
+COPY --from=builder /app /app
 
 ENTRYPOINT [ "./mygram" ]

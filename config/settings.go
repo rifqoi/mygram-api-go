@@ -13,9 +13,11 @@ func LoadEnv() {
 		return
 	}
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if environment := os.Getenv("ENVIRONMENT"); environment != "PROD" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
 	}
 }
 
